@@ -6,6 +6,7 @@ import { Container, Title, LanguagesBadge, Languages, Section } from './styles';
 import Button from '../../components/Button';
 import SearchBar from '../../components/SearchBar';
 
+import none from '../../assets/none.png';
 import java from '../../assets/java.png';
 import javascript from '../../assets/javascript.png';
 import python from '../../assets/python.png';
@@ -13,6 +14,10 @@ import ruby from '../../assets/ruby.png';
 import elixir from '../../assets/elixir.png';
 
 const languages = [
+  {
+    name: 'none',
+    image: none,
+  },
   {
     name: 'java',
     image: java,
@@ -39,13 +44,12 @@ export default function Home() {
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
-  const [languageFilter, setLanguageFilter] = useState('');
+  const [languageFilter, setLanguageFilter] = useState('none');
 
   function handleSearch(event) {
     event.preventDefault();
     setIsLoading(true);
-    console.log(languageFilter);
-    history.push('/repositories/java');
+    history.push(`/repositories/${languageFilter}/${search}`);
   }
 
   return (
@@ -64,6 +68,7 @@ export default function Home() {
       <Section>
         {languages.map((l) => (
           <LanguagesBadge
+            key={l.name}
             isSelected={l.name === languageFilter}
             onClick={() => setLanguageFilter(l.name)}
           >
@@ -74,24 +79,3 @@ export default function Home() {
     </Container>
   );
 }
-
-/**
- *       <button type="button" onClick={handleSearch}>
-        {isLoading ? 'Loading...' : 'Search'}
-      </button>
- */
-
-/**
-  *  <LanguagesBadge onClick={() => setLanguageFilter('java')}>
-          <Languages src={java} alt="java" />
-        </LanguagesBadge>
-        <LanguagesBadge onClick={() => setLanguageFilter('javascript')}>
-          <Languages src={javascript} alt="javascript" />
-        </LanguagesBadge>
-        <LanguagesBadge onClick={() => setLanguageFilter('ruby')}>
-          <Languages src={ruby} alt="ruby" />
-        </LanguagesBadge>
-        <LanguagesBadge onClick={() => setLanguageFilter('python')}>
-          <Languages src={python} alt="python" />
-        </LanguagesBadge>
-  */
