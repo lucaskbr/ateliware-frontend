@@ -12,29 +12,3 @@ export const Container = styled.div`
   padding: 0;
   flex-wrap: wrap;
 `;
-
-export const Repository = styled.div`
-  border: 1px solid #cacaca;
-  width: 100%;
-  height: 250px;
-  max-width: 300px;
-  min-width: 300px;
-
-  margin: 5px;
-  padding: 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-`;
-
-export const RepoImg = styled.img`
-  border: 1px solid transparent;
-  border-radius: 50px;
-  max-height: 100px;
-`;
-
-export const RepoName = styled.h2``;
-
-export const RepoDescription = styled.p``;
