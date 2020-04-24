@@ -14,14 +14,14 @@ export default function Repository({ item, onClickLike, onClick }) {
 
   const [isLiked, setIsLiked] = useState(liked);
 
-  function handleLike() {
+  async function handleLike() {
     setIsLiked(!isLiked);
     onClickLike();
   }
 
   return (
     <Container>
-      <ButtonLike isliked={isLiked} onClick={() => handleLike} />
+      <ButtonLike isliked={isLiked} onClick={handleLike} />
 
       <Card onClick={onClick}>
         <RepoImg src={avatarOwnerUrl} alt={name} />

@@ -22,6 +22,7 @@ export default function Repositories() {
 
       const responseAdapter = result.data.items.map((r) => ({
         id: r.id,
+        githubId: r.id,
         name: r.full_name,
         url: r.html_url,
         avatarOwnerUrl: r.owner.avatar_url,
@@ -48,11 +49,18 @@ export default function Repositories() {
 
   async function handleLike(index) {
     try {
-      api.post('/favorite-repositories', {
-        repository: repositories[index],
+      const { githubId, name, url, description, avatarOwnerUrl } = repositories[
+        index
+      ];
+      await api.post('/favorite-repositories/like', {
+        githubId,
+        name,
+        url,
+        description,
+        avatarOwnerUrl,
       });
     } catch (e) {
-      console.log('Ocorreu um erro');
+      console.log(`Ocorreu um erro ${e}`);
     }
   }
 
