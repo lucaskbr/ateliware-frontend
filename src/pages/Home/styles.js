@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 80vh;
   width: 100%;
   flex: 1;
   display: flex;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 `;
 
 export const Section = styled.div`
@@ -20,11 +20,14 @@ export const Section = styled.div`
   margin: 10px;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h2`
   font-family: Gilroy, sans-serif;
-  color: #222;
+  color: #ef0044;
   font-weight: bold;
   font-size: 40px;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-align: center;
 `;
 
 export const LanguagesBadge = styled.div`
@@ -38,7 +41,7 @@ export const LanguagesBadge = styled.div`
   border-radius: 5px;
   margin: 5px;
 
-  transition: 1s;
+  transition: 0.4s;
 
   &:hover {
     border-color: #ef0044;
