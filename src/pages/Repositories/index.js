@@ -1,26 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import BarLoader from 'react-spinners/BarLoader';
 
 import githubApi from '../../services/github';
 import api from '../../services/api';
 
-import { Container } from './styles';
+import openNewTab from '../../utils/openNewTab';
+
+import toastConfig from '../../config/toastCofig';
+
 import Repository from '../../components/Repository';
+
+import {
+  Container,
+  Title,
+  RepositoriesList,
+  Pagination,
+  PaginationButton,
+} from './styles';
 
 export default function Repositories() {
   const { language, q } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [repositories, setRepositories] = useState([]);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchApi() {
       const queryLanguage = language ? `+language:${language}` : '';
-      const result = await githubApi.get(
-        `/search/repositories?q=${q}${queryLanguage}&sort=stars&order=desc`
+      setIsLoading(true);
+      const response = await githubApi.get(
+        `/search/repositories?q=${q}${queryLanguage}&sort=stars&order=desc&page=${page}`
       );
 
-      const responseAdapter = result.data.items.map((r) => ({
+      const responseAdapter = response.data.items.map((r) => ({
         id: r.id,
         githubId: r.id,
         name: r.full_name,
@@ -31,27 +46,22 @@ export default function Repositories() {
       }));
 
       setRepositories(responseAdapter);
+      setIsLoading(false);
     }
     fetchApi();
-    setIsLoading(false);
-  }, [language, q]);
-
-  useEffect(() => {
-    setRepositories(repositories);
-  }, [repositories]);
-
-  async function openGithubRepository(url) {
-    const win = window.open(url, '_blank');
-    if (win != null) {
-      win.focus();
-    }
-  }
+  }, [language, q, page]);
 
   async function handleLike(index) {
     try {
-      const { githubId, name, url, description, avatarOwnerUrl } = repositories[
-        index
-      ];
+      const {
+        githubId,
+        name,
+        url,
+        description,
+        avatarOwnerUrl,
+        liked,
+      } = repositories[index];
+
       await api.post('/favorite-repositories/like', {
         githubId,
         name,
@@ -59,8 +69,18 @@ export default function Repositories() {
         description,
         avatarOwnerUrl,
       });
+
+      if (!liked) {
+        toast.success('😍 Ebaaa, um novo favorito!', toastConfig);
+      }
+
+      repositories[index].liked = !repositories[index].liked;
+      setRepositories(repositories);
     } catch (e) {
-      console.log(`Ocorreu um erro ${e}`);
+      toast.error(
+        '😭 Ocorreu um erro, tente novamente mais tarde',
+        toastConfig
+      );
     }
   }
 
@@ -70,19 +90,40 @@ export default function Repositories() {
         <BarLoader width={300} color="#ef0044" />
       ) : (
         <>
-          {repositories.map((r, i) => (
-            <Repository
-              key={r.id}
-              item={r}
-              onClick={() => openGithubRepository(r.url)}
-              onClickLike={() => handleLike(i)}
-            />
-          ))}
+          <Title>
+            {language} - Repositories/
+            <span role="img" aria-label="glass">
+              😎
+            </span>
+          </Title>
+          <RepositoriesList>
+            {repositories.map((r, i) => (
+              <Repository
+                key={r.id}
+                item={r}
+                showLike
+                onClick={() => openNewTab(r.url)}
+                onClickLike={() => handleLike(i)}
+              />
+            ))}
+          </RepositoriesList>
+          <Pagination>
+            <PaginationButton
+              type="button"
+              disabled={page === 1}
+              allowed={page === 1}
+              onClick={() => setPage(page - 1)}
+            >
+              <AiOutlineLeft color="#000" size={20} />
+            </PaginationButton>
+            {page}
+            <PaginationButton type="button" onClick={() => setPage(page + 1)}>
+              <AiOutlineRight color="#000" size={20} />
+            </PaginationButton>
+          </Pagination>
+          <ToastContainer />
         </>
       )}
     </Container>
   );
 }
-/**
- *
- */
