@@ -1,7 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
+import background from '../assets/background.svg';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,800&display=swap');
   * {
     margin: 0;
     padding: 0;
@@ -9,19 +11,19 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
   body {
-    background: #fff;
+    background: #fff url(${background}) no-repeat center top;
     -webkit-font-smoothing: antialiased;
   }
   body, input, button {
     font-size: 14px;
-    font-family: Roboto, sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
   #root{
     max-width: 1020px;
     margin: 0 auto;
-
   }
   button {
     cursor: pointer;
   }
+
 `;
