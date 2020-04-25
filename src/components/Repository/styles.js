@@ -13,6 +13,7 @@ export const Card = styled.div`
   height: 250px;
   max-width: 300px;
   min-width: 300px;
+  background: #f7f7f7;
 
   margin: 5px;
   padding: 20px;
@@ -42,6 +43,7 @@ export const ButtonLike = styled(AiFillHeart).attrs({
   }
 
   color: ${(props) => (props.isliked ? '#ef0044' : '#ccccc')};
+  width: ${(props) => props.disableLike && '0px'};
 `;
 
 export const RepoImg = styled.img`
@@ -63,7 +65,7 @@ export const RepoName = styled.h2`
 export const RepoDescription = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 32px; /* fallback */
-  -webkit-line-clamp: 2; /* number of lines to show */
+  max-height: 32px;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 `;
