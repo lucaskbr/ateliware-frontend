@@ -14,8 +14,9 @@ export const Title = styled.h2`
   font-family: Gilroy, sans-serif;
   color: #ef0044;
   font-size: 40px;
-  text-transform: uppercase;
   font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
   margin-top: 50px;
 `;
 
