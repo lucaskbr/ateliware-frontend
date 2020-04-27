@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-height: 100vh;
   height: 100%;
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,8 +11,9 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
+  color: #ef0044;
+  font-family: Gilroy, sans-serif;
   font-size: 40px;
-  color: #fff;
   text-transform: uppercase;
   font-weight: 900;
   margin-top: 50px;
@@ -50,7 +51,7 @@ export const PaginationButton = styled.button.attrs((props) => ({
   font-weight: 600;
   border: 4px;
   padding: 15px 30px;
-  border-radius: 0px;
+
   cursor: ${(props) => props.allowed && 'not-allowed'};
   &:hover {
     background: #eae8e8;

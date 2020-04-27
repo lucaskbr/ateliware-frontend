@@ -29,10 +29,7 @@ export default function RepositoriesLiked() {
       try {
         const response = await api.get(`/favorite-repositories?page=${page}`);
         if (response.data.length === 0) {
-          toast.error(
-            'Não existe mais informações a serem exbidas',
-            toastConfig
-          );
+          toast.error('Does not exists more repositories to show', toastConfig);
           setPage(page - 1);
           return;
         }
@@ -40,10 +37,7 @@ export default function RepositoriesLiked() {
         setRepositories(response.data);
         setIsLoading(false);
       } catch (e) {
-        toast.error(
-          '😭 Ocorreu um erro, tente novamente mais tarde',
-          toastConfig
-        );
+        toast.error('😭 Opsss, try again later', toastConfig);
       }
     }
 

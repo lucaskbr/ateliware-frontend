@@ -1,46 +1,44 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  min-height: 80vh;
   width: 100%;
+  min-height: 80vh;
+  margin: 0;
+  padding: 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 20px;
 `;
 
 export const Section = styled.div`
   width: 100%;
+  margin: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px;
 `;
 
 export const Title = styled.h2`
-  font-family: Gilroy, sans-serif;
   color: #ef0044;
-  font-weight: bold;
+  font-family: Gilroy, sans-serif;
   font-size: 40px;
-  text-transform: uppercase;
   font-weight: 900;
   text-align: center;
+  text-transform: uppercase;
 `;
 
 export const LanguagesBadge = styled.div`
-  padding: 10px;
   width: 100%;
   max-width: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border: 1px solid #cacaca;
   border-radius: 5px;
   margin: 5px;
-
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: 0.4s;
 
   &:hover {

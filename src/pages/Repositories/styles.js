@@ -11,8 +11,9 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h2`
+  font-family: Gilroy, sans-serif;
+  color: #ef0044;
   font-size: 40px;
-  color: #fff;
   text-transform: uppercase;
   font-weight: 900;
   margin-top: 50px;

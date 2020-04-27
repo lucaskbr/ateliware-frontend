@@ -71,16 +71,13 @@ export default function Repositories() {
       });
 
       if (!liked) {
-        toast.success('😍 Ebaaa, um novo favorito!', toastConfig);
+        toast.success('😍 Nice, a new favorite!', toastConfig);
       }
 
       repositories[index].liked = !repositories[index].liked;
       setRepositories(repositories);
     } catch (e) {
-      toast.error(
-        '😭 Ocorreu um erro, tente novamente mais tarde',
-        toastConfig
-      );
+      toast.error('😭 Ops, try again later', toastConfig);
     }
   }
 
