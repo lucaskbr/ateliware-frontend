@@ -35,12 +35,12 @@ export default function Home() {
       <Section>
         <SearchBar
           type="text"
-          placeholder="Bolacha"
+          placeholder="Cookie"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
         <Button
-          title="Buscar"
+          title="Search"
           notAllowed={search.length === 0}
           onClick={handleSearch}
           isLoading={isLoading}
